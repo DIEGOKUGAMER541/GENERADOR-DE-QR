@@ -18,6 +18,15 @@ background: url("https://i.imgur.com/z4guq1U.jpeg") no-repeat center center fixe
   margin:0;
 }
 
+/* 📱 MÓVIL */
+@media (max-width: 600px) {
+  body {
+    background: url("https://i.imgur.com/tdiVvNP.jpeg") no-repeat center center;
+    background-size: cover;
+    background-attachment: scroll; /* 🔥 evita bug en celular */
+    min-height: 100vh;
+  }
+}
 /* Contenedor */
 .container {
   max-width: 500px;
