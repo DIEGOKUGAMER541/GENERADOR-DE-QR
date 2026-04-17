@@ -1,156 +1,183 @@
-<!DOCTYPE html><html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Generador QR</title><link rel="icon" href="https://mc-heads.net/avatar/diegokugamer541" type="image/png"><script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.js"></script><style>
-::-webkit-scrollbar { display: none; }
-html, body { scrollbar-width: none; }
-body { -ms-overflow-style: none; }
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador QR</title>
+    <link
+      rel="icon"
+      href="https://mc-heads.net/avatar/diegokugamer541"
+      type="image/png"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.js"></script>
+    <style>
+      ::-webkit-scrollbar {
+        display: none;
+      }
 
-body {
-  background: url("https://i.imgur.com/z4guq1U.jpeg") no-repeat center center fixed;
-  background-size: cover;
-  color:white;
-  text-align:center;
-  font-family:Arial;
-  padding:20px;
-  margin:0;
-}
+      html,
+      body {
+        scrollbar-width: none;
+      }
 
-@media (max-width: 600px) {
-  body {
-    background: url("https://i.imgur.com/tdiVvNP.jpeg") no-repeat center center;
-    background-size: cover;
-    background-attachment: scroll;
-    min-height: 100vh;
-  }
-}
+      body {
+        -ms-overflow-style: none;
+      }
 
-.container {
-  max-width: 500px;
-  margin: auto;
-}
+      body {
+        background: url("https://i.imgur.com/z4guq1U.jpeg") no-repeat center
+          center fixed;
+        background-size: cover;
+        color: white;
+        text-align: center;
+        font-family: Arial;
+        padding: 20px;
+        margin: 0;
+      }
 
-canvas {
-  width: 100%;
-  max-width: 320px;
-  height: auto;
-  margin-top:20px;
-}
+      @media (max-width: 600px) {
+        body {
+          background: url("https://i.imgur.com/tdiVvNP.jpeg") no-repeat center
+            center;
+          background-size: cover;
+          background-attachment: scroll;
+          min-height: 100vh;
+        }
+      }
 
-button {
-  background: #1f1f1f;
-  color: white;
-  border: 2px solid #333;
-  border-radius: 10px;
-  padding: 10px 18px;
-  cursor: pointer;
-  transition: 0.3s;
-  width: 100%;
-  max-width: 300px;
-  margin: 5px auto;
-  display: block;
-}
+      .container {
+        max-width: 500px;
+        margin: auto;
+      }
 
-button:hover {
-  background: #d4ff00;
-  color: black;
-  border-color: #d4ff00;
-}
+      canvas {
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+        margin-top: 20px;
+      }
 
-input[type="color"] {
-  width: 60px;
-  height: 40px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  background: none;
-}
+      button {
+        background: #1f1f1f;
+        color: white;
+        border: 2px solid #333;
+        border-radius: 10px;
+        padding: 10px 18px;
+        cursor: pointer;
+        transition: 0.3s;
+        width: 100%;
+        max-width: 300px;
+        margin: 5px auto;
+        display: block;
+      }
 
-input[type="color"]::-webkit-color-swatch,
-input[type="color"]::-moz-color-swatch {
-  border-radius: 8px;
-  border: 2px solid #333;
-}
+      button:hover {
+        background: #d4ff00;
+        color: black;
+        border-color: #d4ff00;
+      }
 
-select {
-  padding:10px;
-  border-radius:8px;
-  margin:10px;
-  width: 100%;
-  max-width: 300px;
-}
+      input[type="color"] {
+        width: 60px;
+        height: 40px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background: none;
+      }
 
-.inputBox {
-  position: relative;
-  width: 100%;
-  max-width: 300px;
-  margin: 10px auto;
-}
+      input[type="color"]::-webkit-color-swatch,
+      input[type="color"]::-moz-color-swatch {
+        border-radius: 8px;
+        border: 2px solid #333;
+      }
 
-.inputBox input {
-  width: 100%;
-  padding: 12px;
-  background: transparent;
-  border: 2px solid #d4ff00;
-  color: #d4ff00;
-  border-radius: 8px;
-  outline: none;
-}
+      select {
+        padding: 10px;
+        border-radius: 8px;
+        margin: 10px;
+        width: 100%;
+        max-width: 300px;
+      }
 
-.inputBox span {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: rgba(212,255,0,0.6);
-  pointer-events: none;
-  transition: 0.3s;
-}
+      .inputBox {
+        position: relative;
+        width: 100%;
+        max-width: 300px;
+        margin: 18px auto;
+      }
 
-.inputBox input:focus ~ span,
-.inputBox input:valid ~ span {
-  top: -8px;
-  font-size: 12px;
-  padding: 0 5px;
-  color: #d4ff00;
-}
-</style></head><body><div class="container"><h2>Generador QR</h2><label>Tipo de QR:</label>
-<select id="tipo" onchange="cambiarTipo()">
+      .inputBox input {
+        width: 100%;
+        padding: 12px;
+        background: transparent;
+        border: 2px solid #00d5ff;
+        color: #00d5ff;
+        border-radius: 8px;
+        outline: none;
+      }
 
-  <option value="texto">Texto / URL</option>
-  <option value="contacto">Contacto</option>
-  <option value="wifi">WiFi</option>
+      .inputBox span {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #00d5ff;
+        pointer-events: none;
+        transition: 0.3s;
+      }
 
+      .inputBox input:focus ~ span,
+      .inputBox input:valid ~ span {
+        top: -8px;
+        font-size: 12px;
+        padding: 0 5px;
+        color: #00d5ff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Generador QR</h2>
+      <label>Tipo de QR:</label>
+      <select id="tipo" onchange="cambiarTipo()">
+        <option value="texto">Texto / URL</option>
+        <option value="contacto">Contacto</option>
+        <option value="wifi">WiFi</option>
+      </select>
+      <div class="inputBox" id="inputPrincipal">
+        <input type="text" id="texto" required />
+        <span>Introduce Texto o URL</span>
+      </div>
+      <!-- 🔥 NUEVO: campos dinámicos -->
+      <div id="camposExtra"></div>
+      <label>Color:</label>
+      <input type="color" id="color" value="#000000" /><br />
 
-</select><div class="inputBox" id="inputPrincipal">
-  <input type="text" id="texto" required>
-  <span>Introduce Texto o URL</span>
-</div><!-- 🔥 NUEVO: campos dinámicos --><div id="camposExtra"></div><label>Color:</label>
-<input type="color" id="color" value="#000000"><br>
+      <label>Diseño:</label>
+      <select id="estilo">
+        <option value="normal">Normal</option>
+        <option value="lineas">Líneas internas</option>
+        <option value="capsulas">Cápsulas</option></select
+      ><br /><label>
+        <input type="checkbox" id="fondo" checked />
+        Con Fondo </label
+      ><br /><button onclick="generarQR()">Generar QR</button>
+      <button onclick="descargar()">Descargar QR</button>
 
-<label>Diseño:</label>
-<select id="estilo">
+      <br />
+      <canvas id="canvas"></canvas>
+    </div>
+    <script>
+      function cambiarTipo() {
+        const tipo = document.getElementById("tipo").value;
+        const contenedor = document.getElementById("camposExtra");
+        const inputPrincipal = document.getElementById("inputPrincipal");
 
-  <option value="normal">Normal</option>
-  <option value="lineas">Líneas internas</option>
-  <option value="capsulas">Cápsulas</option>
-</select><br><label>
-  <input type="checkbox" id="fondo" checked>
-  Con Fondo
-</label><br><button onclick="generarQR()">Generar QR</button>
-<button onclick="descargar()">Descargar QR</button>
+        if (tipo === "contacto") {
+          inputPrincipal.style.display = "none";
 
-<br>
-<canvas id="canvas"></canvas></div><script>
-function cambiarTipo() {
-  const tipo = document.getElementById("tipo").value;
-  const contenedor = document.getElementById("camposExtra");
-  const inputPrincipal = document.getElementById("inputPrincipal");
-
-  if (tipo === "contacto") {
-    inputPrincipal.style.display = "none";
-
-    contenedor.innerHTML = `
+          contenedor.innerHTML = `
       <div class="inputBox">
         <input type="text" id="nombre" required>
         <span>Nombre</span>
@@ -166,12 +193,10 @@ function cambiarTipo() {
         <span>Dirección</span>
       </div>
     `;
-  }
+        } else if (tipo === "wifi") {
+          inputPrincipal.style.display = "none";
 
-  else if (tipo === "wifi") {
-    inputPrincipal.style.display = "none";
-
-    contenedor.innerHTML = `
+          contenedor.innerHTML = `
       <div class="inputBox">
         <input type="text" id="ssid" required>
         <span>Nombre de la red (SSID)</span>
@@ -189,138 +214,153 @@ function cambiarTipo() {
         <option value="nopass">Sin contraseña</option>
       </select>
     `;
-  }
-
-  else {
-    inputPrincipal.style.display = "block";
-    contenedor.innerHTML = "";
-  }
-}
-function generarQR() {
-
-  const tipo = document.getElementById("tipo").value;
-  const color = document.getElementById("color").value;
-  const fondo = document.getElementById("fondo").checked;
-  const estilo = document.getElementById("estilo").value;
-
-  let texto = "";
-
-  if (tipo === "texto") {
-    texto = document.getElementById("texto").value || "https://bedpks.com";
-  }
-
-  if (tipo === "contacto") {
-    const nombre = document.getElementById("nombre").value || "";
-    const telefono = document.getElementById("telefono").value || "";
-    const direccion = document.getElementById("direccion").value || "";
-
-    texto = `MECARD:N:${nombre};TEL:${telefono};ADR:${direccion};;`;
-  }
-
-  if (tipo === "wifi") {
-  const ssid = document.getElementById("ssid").value || "";
-  const password = document.getElementById("password").value || "";
-  const seguridad = document.getElementById("seguridad").value;
-
-  texto = `WIFI:T:${seguridad};S:${ssid};P:${password};;`;
-}
-
-  const qr = qrcode(0, 'H');
-  qr.addData(texto);
-  qr.make();
-
-  const canvas = document.getElementById("canvas");
-  const size = Math.min(window.innerWidth * 0.8, 400);
-
-  canvas.width = size;
-  canvas.height = size;
-
-  const ctx = canvas.getContext("2d");
-  const count = qr.getModuleCount();
-  const cell = size / count;
-
-  ctx.clearRect(0,0,size,size);
-
-  if (fondo) {
-    ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, size, size);
-  }
-
-  ctx.fillStyle = color;
-
-  for (let r=0;r<count;r++){
-    for (let c=0;c<count;c++){
-
-      if(!qr.isDark(r,c)) continue;
-
-      const x = c*cell;
-      const y = r*cell;
-
-      const isFinder =
-        (r<7 && c<7) ||
-        (r<7 && c>count-8) ||
-        (r>count-8 && c<7);
-
-      if(isFinder){
-        ctx.fillRect(x,y,cell,cell);
-        continue;
+        } else {
+          inputPrincipal.style.display = "block";
+          contenedor.innerHTML = "";
+        }
       }
+      function generarQR() {
+        const tipo = document.getElementById("tipo").value;
+        const color = document.getElementById("color").value;
+        const fondo = document.getElementById("fondo").checked;
+        const estilo = document.getElementById("estilo").value;
 
-      if(estilo === "normal"){
-        ctx.fillRect(x,y,cell,cell);
-      }
+        let texto = "";
 
-      else if(estilo === "lineas"){
-        const sub = 3;
-        const mini = cell / sub;
+        if (tipo === "texto") {
+          texto =
+            document.getElementById("texto").value || "https://bedpks.com";
+        }
 
-        for(let i=0;i<sub;i++){
-          for(let j=0;j<sub;j++){
-            const pattern = (r + c + i + j) % 2;
+        if (tipo === "contacto") {
+          const nombre = document.getElementById("nombre").value || "";
+          const telefono = document.getElementById("telefono").value || "";
+          const direccion = document.getElementById("direccion").value || "";
 
-            if(pattern === 0){
-              ctx.fillRect(x + j*mini, y + i*mini, mini*0.9, mini*0.3);
-            } else {
-              ctx.fillRect(x + j*mini, y + i*mini, mini*0.3, mini*0.9);
+          texto = `MECARD:N:${nombre};TEL:${telefono};ADR:${direccion};;`;
+        }
+
+        if (tipo === "wifi") {
+          const ssid = document.getElementById("ssid").value || "";
+          const password = document.getElementById("password").value || "";
+          const seguridad = document.getElementById("seguridad").value;
+
+          texto = `WIFI:T:${seguridad};S:${ssid};P:${password};;`;
+        }
+
+        const qr = qrcode(0, "H");
+        qr.addData(texto);
+        qr.make();
+
+        const canvas = document.getElementById("canvas");
+        const size = Math.min(window.innerWidth * 0.8, 400);
+
+        canvas.width = size;
+        canvas.height = size;
+
+        const ctx = canvas.getContext("2d");
+        const count = qr.getModuleCount();
+        const cell = size / count;
+
+        ctx.clearRect(0, 0, size, size);
+
+        if (fondo) {
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, size, size);
+        }
+
+        ctx.fillStyle = color;
+
+        for (let r = 0; r < count; r++) {
+          for (let c = 0; c < count; c++) {
+            if (!qr.isDark(r, c)) continue;
+
+            const x = c * cell;
+            const y = r * cell;
+
+            const isFinder =
+              (r < 7 && c < 7) ||
+              (r < 7 && c > count - 8) ||
+              (r > count - 8 && c < 7);
+
+            if (isFinder) {
+              ctx.fillRect(x, y, cell, cell);
+              continue;
+            }
+
+            if (estilo === "normal") {
+              ctx.fillRect(x, y, cell, cell);
+            } else if (estilo === "lineas") {
+              const sub = 3;
+              const mini = cell / sub;
+
+              for (let i = 0; i < sub; i++) {
+                for (let j = 0; j < sub; j++) {
+                  const pattern = (r + c + i + j) % 2;
+
+                  if (pattern === 0) {
+                    ctx.fillRect(
+                      x + j * mini,
+                      y + i * mini,
+                      mini * 0.9,
+                      mini * 0.3,
+                    );
+                  } else {
+                    ctx.fillRect(
+                      x + j * mini,
+                      y + i * mini,
+                      mini * 0.3,
+                      mini * 0.9,
+                    );
+                  }
+                }
+              }
+            } else if (estilo === "capsulas") {
+              const cx = x + cell / 2;
+              const cy = y + cell / 2;
+
+              const pattern = (r + c) % 2;
+
+              if (pattern === 0) {
+                ctx.fillRect(
+                  x + cell * 0.1,
+                  cy - cell * 0.15,
+                  cell * 0.8,
+                  cell * 0.3,
+                );
+              } else {
+                ctx.fillRect(
+                  cx - cell * 0.15,
+                  y + cell * 0.1,
+                  cell * 0.3,
+                  cell * 0.8,
+                );
+              }
             }
           }
         }
       }
 
-      else if(estilo === "capsulas"){
-        const cx = x + cell/2;
-        const cy = y + cell/2;
+      function descargar() {
+        const canvas = document.getElementById("canvas");
+        const link = document.createElement("a");
 
-        const pattern = (r + c) % 2;
+        let tipo = document.getElementById("tipo").value;
+        let nombre = "";
 
-        if(pattern === 0){
-          ctx.fillRect(x + cell*0.1, cy - cell*0.15, cell*0.8, cell*0.3);
-        } else {
-          ctx.fillRect(cx - cell*0.15, y + cell*0.1, cell*0.3, cell*0.8);
-        }
+        if (tipo === "texto") nombre = document.getElementById("texto").value;
+        if (tipo === "contacto")
+          nombre = document.getElementById("nombre")?.value;
+        if (tipo === "wifi") nombre = document.getElementById("ssid")?.value;
+
+        if (!nombre) nombre = "MI-QR";
+
+        nombre = nombre.replace(/[\\/:*?"<>|]/g, "");
+
+        link.download = nombre + ".png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
       }
-    }
-  }
-}
-
-function descargar(){
-  const canvas = document.getElementById("canvas");
-  const link = document.createElement("a");
-
-  let tipo = document.getElementById("tipo").value;
-  let nombre = "";
-  
-  if (tipo === "texto") nombre = document.getElementById("texto").value;
-  if (tipo === "contacto") nombre = document.getElementById("nombre")?.value;
-  if (tipo === "wifi") nombre = document.getElementById("ssid")?.value;
-
-  if (!nombre) nombre = "MI-QR";
-
-  nombre = nombre.replace(/[\\/:*?"<>|]/g, "");
-
-  link.download = nombre + ".png";
-  link.href = canvas.toDataURL("image/png");
-  link.click();
-}
-</script></body>
+    </script>
+  </body>
 </html>
