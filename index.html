@@ -59,7 +59,7 @@
 
       button {
         background: #1f1f1f;
-        color: white;
+        color: #00fbff;
         border: 2px solid #333;
         border-radius: 10px;
         padding: 10px 18px;
@@ -72,9 +72,9 @@
       }
 
       button:hover {
-        background: #d4ff00;
+        background: #00FBFF;
         color: black;
-        border-color: #d4ff00;
+        border-color: #00FBFF;
       }
 
       input[type="color"] {
@@ -157,6 +157,17 @@
         transition: 0.3s;
       }
 
+      label {
+        display: flexbox;
+        margin-top: 20px;
+        font-size: 16px;
+        color: #00fbff; 
+      }
+
+      h2 {
+        color: #00fbff;
+      }
+
       .inputBox input:focus ~ span,
       .inputBox input:valid ~ span {
         top: -8px;
@@ -169,27 +180,32 @@
   <body>
     <div class="container">
       <h2>Generador QR</h2>
-      <label>Tipo de QR:</label>
-      <select id="tipo" onchange="cambiarTipo()">
-        <option value="texto">Texto / URL</option>
-        <option value="contacto">Contacto</option>
-        <option value="wifi">WiFi</option>
-      </select>
+
       <div class="inputBox" id="inputPrincipal">
         <input type="text" id="texto" required />
         <span>Introduce Texto o URL</span>
       </div>
       <!-- 🔥 NUEVO: campos dinámicos -->
       <div id="camposExtra"></div>
-      <label>Color:</label>
-      <input type="color" id="color" value="#000000" /><br />
+
+      <label>Tipo de QR:</label>
+      <select id="tipo" onchange="cambiarTipo()">
+        <option value="texto">Texto / URL</option>
+        <option value="contacto">Contacto</option>
+        <option value="wifi">WiFi</option>
+      </select><br />
 
       <label>Diseño:</label>
       <select id="estilo">
         <option value="normal">Normal</option>
         <option value="lineas">Líneas internas</option>
         <option value="capsulas">Cápsulas</option></select
-      ><br /><label class="checkboxBox">
+      ><br />
+      
+      <label>Color:</label>
+      <input type="color" id="color" value="#000000" /><br />
+      
+      <label class="checkboxBox">
         <input type="checkbox" id="fondo"/>
         <span>Con Fondo</span>
       </label
