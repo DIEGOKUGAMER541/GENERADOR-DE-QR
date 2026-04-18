@@ -92,12 +92,42 @@
         border: 2px solid #333;
       }
 
+      .checkboxBox {
+        display: center;
+        align-items: center;
+        gap: 10px;
+        margin: 10px 0;
+      }
+
+      .checkboxBox span {
+        color: #00fbff;
+      }
+
+      .checkboxBox input {
+        width: auto;
+      }
+
+      .checkboxBox input:checked ~ span {
+        color: #c800ff;
+        text-shadow: 0 0 5px #c800ff;
+      }
+
+      .checkboxBox label {
+        cursor: pointer;
+        color: #00fbff;
+        font-size: 14px;
+      }
+
       select {
+        width: 100%;
         padding: 10px;
-        border-radius: 8px;
         margin: 10px;
         width: 100%;
         max-width: 300px;
+        color: #00fbff;
+        border: 2px solid #00d5ff;
+        background: #333;
+        border-radius: 8px;
       }
 
       .inputBox {
@@ -110,7 +140,7 @@
       .inputBox input {
         width: 100%;
         padding: 12px;
-        background: transparent;
+        background: #333;
         border: 2px solid #00d5ff;
         color: #00d5ff;
         border-radius: 8px;
@@ -159,9 +189,10 @@
         <option value="normal">Normal</option>
         <option value="lineas">Líneas internas</option>
         <option value="capsulas">Cápsulas</option></select
-      ><br /><label>
-        <input type="checkbox" id="fondo" checked />
-        Con Fondo </label
+      ><br /><label class="checkboxBox">
+        <input type="checkbox" id="fondo"/>
+        <span>Con Fondo</span>
+      </label
       ><br /><button onclick="generarQR()">Generar QR</button>
       <button onclick="descargar()">Descargar QR</button>
 
