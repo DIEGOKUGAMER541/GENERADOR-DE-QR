@@ -6,7 +6,7 @@
     <title>Generador QR</title>
     <link
       rel="icon"
-      href="https://mc-heads.net/avatar/diegokugamer541"
+      href="https://i.imgur.com/uHrgKte.png"
       type="image/png"
     />
     <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.js"></script>
@@ -180,7 +180,6 @@
         padding: 0 5px;
         color: #00d5ff;
       }
-      /* Botón flotante */
       .about-btn {
         position: fixed;
         bottom: 20px;
@@ -275,9 +274,7 @@
         <input type="text" id="texto" required />
         <span>Introduce Texto o URL</span>
       </div>
-      <!-- 🔥 NUEVO: campos dinámicos -->
       <div id="camposExtra"></div>
-
       <label>Tipo de QR:</label>
       <select id="tipo" onchange="cambiarTipo()">
         <option value="texto">Texto / URL</option>
@@ -299,9 +296,16 @@
         <input type="checkbox" id="fondo"/>
         <span>Con Fondo</span>
       </label
-      ><br /><button onclick="generarQR()">Generar QR</button>
+      ><br />
+      <label class="checkboxBox">
+      <input type="checkbox" id="logoCheck"     onchange="toggleLogoInput()" />
+      <span>Agregar logotipo</span>
+      </label> 
+      <div id="logoInput" style="display:none; margin-top:10px;">
+      <input type="file" id="logoFile" accept="image/*" />
+      </div> <br />
+      <button onclick="generarQR()">Generar QR</button>
       <button onclick="descargar()">Descargar QR</button>
-
       <br />
       <canvas id="canvas"></canvas>
     </div>
@@ -356,127 +360,153 @@
           contenedor.innerHTML = "";
         }
       }
-      function generarQR() {
-        const tipo = document.getElementById("tipo").value;
-        const color = document.getElementById("color").value;
-        const fondo = document.getElementById("fondo").checked;
-        const estilo = document.getElementById("estilo").value;
+function generarQR() {
+  const tipo = document.getElementById("tipo").value;
+  const color = document.getElementById("color").value;
+  const fondo = document.getElementById("fondo").checked;
+  const estilo = document.getElementById("estilo").value;
 
-        let texto = "";
+  let texto = "";
 
-        if (tipo === "texto") {
-          texto =
-            document.getElementById("texto").value || "https://bedpks.com";
-        }
+  if (tipo === "texto") {
+    texto =
+      document.getElementById("texto").value || "https://bedpks.com";
+  }
 
-        if (tipo === "contacto") {
-          const nombre = document.getElementById("nombre").value || "";
-          const telefono = document.getElementById("telefono").value || "";
-          const direccion = document.getElementById("direccion").value || "";
+  if (tipo === "contacto") {
+    const nombre = document.getElementById("nombre").value || "";
+    const telefono = document.getElementById("telefono").value || "";
+    const direccion = document.getElementById("direccion").value || "";
 
-          texto = `MECARD:N:${nombre};TEL:${telefono};ADR:${direccion};;`;
-        }
+    texto = `MECARD:N:${nombre};TEL:${telefono};ADR:${direccion};;`;
+  }
 
-        if (tipo === "wifi") {
-          const ssid = document.getElementById("ssid").value || "";
-          const password = document.getElementById("password").value || "";
-          const seguridad = document.getElementById("seguridad").value;
+  if (tipo === "wifi") {
+    const ssid = document.getElementById("ssid").value || "";
+    const password = document.getElementById("password").value || "";
+    const seguridad = document.getElementById("seguridad").value;
 
-          texto = `WIFI:T:${seguridad};S:${ssid};P:${password};;`;
-        }
+    texto = `WIFI:T:${seguridad};S:${ssid};P:${password};;`;
+  }
 
-        const qr = qrcode(0, "H");
-        qr.addData(texto);
-        qr.make();
+  const qr = qrcode(0, "H");
+  qr.addData(texto);
+  qr.make();
 
-        const canvas = document.getElementById("canvas");
-        const size = Math.min(window.innerWidth * 0.8, 400);
+  const canvas = document.getElementById("canvas");
+  const size = Math.min(window.innerWidth * 0.8, 400);
 
-        canvas.width = size;
-        canvas.height = size;
+  canvas.width = size;
+  canvas.height = size;
 
-        const ctx = canvas.getContext("2d");
-        const count = qr.getModuleCount();
-        const cell = size / count;
+  const ctx = canvas.getContext("2d");
+  const count = qr.getModuleCount();
+  const cell = size / count;
 
-        ctx.clearRect(0, 0, size, size);
+  ctx.clearRect(0, 0, size, size);
 
-        if (fondo) {
-          ctx.fillStyle = "#ffffff";
-          ctx.fillRect(0, 0, size, size);
-        }
+  if (fondo) {
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, size, size);
+  }
 
-        ctx.fillStyle = color;
+  ctx.fillStyle = color;
 
-        for (let r = 0; r < count; r++) {
-          for (let c = 0; c < count; c++) {
-            if (!qr.isDark(r, c)) continue;
+  for (let r = 0; r < count; r++) {
+    for (let c = 0; c < count; c++) {
+      if (!qr.isDark(r, c)) continue;
 
-            const x = c * cell;
-            const y = r * cell;
+      const x = c * cell;
+      const y = r * cell;
 
-            const isFinder =
-              (r < 7 && c < 7) ||
-              (r < 7 && c > count - 8) ||
-              (r > count - 8 && c < 7);
+      const isFinder =
+        (r < 7 && c < 7) ||
+        (r < 7 && c > count - 8) ||
+        (r > count - 8 && c < 7);
 
-            if (isFinder) {
-              ctx.fillRect(x, y, cell, cell);
-              continue;
-            }
+      if (isFinder) {
+        ctx.fillRect(x, y, cell, cell);
+        continue;
+      }
 
-            if (estilo === "normal") {
-              ctx.fillRect(x, y, cell, cell);
-            } else if (estilo === "lineas") {
-              const sub = 3;
-              const mini = cell / sub;
+      if (estilo === "normal") {
+        ctx.fillRect(x, y, cell, cell);
+      } else if (estilo === "lineas") {
+        const sub = 3;
+        const mini = cell / sub;
 
-              for (let i = 0; i < sub; i++) {
-                for (let j = 0; j < sub; j++) {
-                  const pattern = (r + c + i + j) % 2;
+        for (let i = 0; i < sub; i++) {
+          for (let j = 0; j < sub; j++) {
+            const pattern = (r + c + i + j) % 2;
 
-                  if (pattern === 0) {
-                    ctx.fillRect(
-                      x + j * mini,
-                      y + i * mini,
-                      mini * 0.9,
-                      mini * 0.3,
-                    );
-                  } else {
-                    ctx.fillRect(
-                      x + j * mini,
-                      y + i * mini,
-                      mini * 0.3,
-                      mini * 0.9,
-                    );
-                  }
-                }
-              }
-            } else if (estilo === "capsulas") {
-              const cx = x + cell / 2;
-              const cy = y + cell / 2;
-
-              const pattern = (r + c) % 2;
-
-              if (pattern === 0) {
-                ctx.fillRect(
-                  x + cell * 0.1,
-                  cy - cell * 0.15,
-                  cell * 0.8,
-                  cell * 0.3,
-                );
-              } else {
-                ctx.fillRect(
-                  cx - cell * 0.15,
-                  y + cell * 0.1,
-                  cell * 0.3,
-                  cell * 0.8,
-                );
-              }
+            if (pattern === 0) {
+              ctx.fillRect(
+                x + j * mini,
+                y + i * mini,
+                mini * 0.9,
+                mini * 0.3,
+              );
+            } else {
+              ctx.fillRect(
+                x + j * mini,
+                y + i * mini,
+                mini * 0.3,
+                mini * 0.9,
+              );
             }
           }
         }
+      } else if (estilo === "capsulas") {
+        const cx = x + cell / 2;
+        const cy = y + cell / 2;
+
+        const pattern = (r + c) % 2;
+
+        if (pattern === 0) {
+          ctx.fillRect(
+            x + cell * 0.1,
+            cy - cell * 0.15,
+            cell * 0.8,
+            cell * 0.3,
+          );
+        } else {
+          ctx.fillRect(
+            cx - cell * 0.15,
+            y + cell * 0.1,
+            cell * 0.3,
+            cell * 0.8,
+          );
+        }
       }
+    }
+  }
+
+  const usarLogo = document.getElementById("logoCheck").checked;
+  const file = document.getElementById("logoFile").files[0];
+
+  if (usarLogo && file) {
+    const img = new Image();
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+      img.src = e.target.result;
+    };
+
+    img.onload = function() {
+      const logoSize = size * 0.25;
+      const x = (size - logoSize) / 2;
+      const y = (size - logoSize) / 2;
+
+      ctx.drawImage(img, x, y, logoSize, logoSize);
+    };
+
+    reader.readAsDataURL(file);
+  }
+}
+      function toggleLogoInput() {
+      const check = document.getElementById("logoCheck").checked;
+      document.getElementById("logoInput").style.display =   check ? "block" : "none";
+    }
 
       function descargar() {
         const canvas = document.getElementById("canvas");
