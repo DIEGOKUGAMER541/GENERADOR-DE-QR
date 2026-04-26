@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Generador QR</title>
     <link
-      rel="icon"
-      href="https://i.imgur.com/uHrgKte.png"
-      type="image/png"
-    />
+      rel="icon" href="https://i.imgur.com/uHrgKte.png" type="image/png"/>
     <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.js"></script>
     <style>
+
       ::-webkit-scrollbar {
         display: none;
       }
@@ -25,10 +23,9 @@
       }
 
       body {
-        background: url("https://i.imgur.com/z4guq1U.jpeg") no-repeat center
-          center fixed;
+        background: url("https://i.imgur.com/z4guq1U.jpeg") no-repeat center center fixed;
         background-size: cover;
-        color: white;
+        color: transparent;
         text-align: center;
         font-family: Arial;
         padding: 20px;
@@ -37,26 +34,22 @@
 
       @media (max-width: 600px) {
         body {
-          background: url("https://i.imgur.com/tdiVvNP.jpeg") no-repeat center
-            center;
+          background: url("https://i.imgur.com/tdiVvNP.jpeg") no-repeat center center;
           background-size: cover;
           background-attachment: scroll;
           min-height: 100vh;
         }
       }
-
       .container {
         max-width: 500px;
         margin: auto;
       }
-
       canvas {
         width: 100%;
         max-width: 320px;
         height: auto;
         margin-top: 20px;
       }
-
       button {
         background: #1f1f1f;
         color: #00fbff;
@@ -165,7 +158,7 @@
         color: #00fbff; 
       }
 
-      h2 {
+      h1 {
         color: #00fbff;
       }
 
@@ -184,7 +177,7 @@
         position: fixed;
         bottom: 20px;
         right: 20px;
-        background: #1f1f1f;
+        background: #333;
         color: #00fbff;
         border: 2px solid #00fbff;
         border-radius: 50%;
@@ -204,14 +197,13 @@
         color: black;
       }
 
-      /* Panel oscuro */
       .about-panel {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0,0,0,0.8);
+        background: #000000cc;
         backdrop-filter: blur(8px);
       
         display: flex;
@@ -223,13 +215,11 @@
         transition: 0.3s;
       }
 
-      /* Panel activo */
       .about-panel.active {
         opacity: 1;
         pointer-events: all;
       }
 
-      /* Contenido */
       .about-content {
         background: #1f1f1f;
         padding: 25px;
@@ -268,7 +258,7 @@
   </head>
   <body>
     <div class="container">
-      <h2>Generador QR</h2>
+      <h1>Generador QR</h1>
 
       <div class="inputBox" id="inputPrincipal">
         <input type="text" id="texto" required />
@@ -308,6 +298,25 @@
       <button onclick="descargar()">Descargar QR</button>
       <br />
       <canvas id="canvas"></canvas>
+    </div>
+    <div class="about-btn" onclick="toggleAbout()">ℹ</div>
+
+<div class="about-panel" id="aboutPanel">
+  <div class="about-content">
+    <h3>Acerca de</h3>
+    <p>Desarrollado por DIEGOKUGAMER541</p>
+    <div class="links">
+    <a href="https://diegokugamer541.github.io/GENERADOR-DE-MANIFEST" target="_blank">Generador de Manifest</a>
+    <a href="https://diegokugamer541.github.io/TEXTO-A-IMAGEN" target="_blank">Texto a imagen</a>
+    <a href="https://diegokugamer541.github.io/Categorias-twitch/" target="_blank">Categorias de Twitch</a>
+    <a href="https://bedpks.com" target="_blank">BedPKS</a>
+    <a href="https://youtube.com/@diegokugamer541" target="_blank">YouTube</a>
+    <a href="https://twitch.tv/diegokugamer541" target="_blank">Twitch</a>
+    <a href="https://discord.gg/AMCtjwVNvk"   target="_blank">Discord Minecraft</a>
+    <a href="https://github.com/DIEGOKUGAMER541" target="_blank">GitHub</a>
+    <a href="https://youtube.com/@ipodcraft" target="_blank">Youtube Ipodcraft</a>
+    <a href="https://twitch.tv/ipodcraftyt" target="_blank">Twitch IpodcraftYT</a>
+    <a href="https://ipodcraft.com" target="_blank"> Ipodcraft web</a>
     </div>
     <script>
       function cambiarTipo() {
@@ -483,30 +492,29 @@ function generarQR() {
 
   const usarLogo = document.getElementById("logoCheck").checked;
   const file = document.getElementById("logoFile").files[0];
-
-  if (usarLogo && file) {
-    const img = new Image();
-    const reader = new FileReader();
-
-    reader.onload = function(e) {
-      img.src = e.target.result;
-    };
-
-    img.onload = function() {
-      const logoSize = size * 0.25;
-      const x = (size - logoSize) / 2;
-      const y = (size - logoSize) / 2;
-
-      ctx.drawImage(img, x, y, logoSize, logoSize);
-    };
-
-    reader.readAsDataURL(file);
-  }
-}
+        if (usarLogo && file) {
+          const img = new Image();
+          const reader = new FileReader();
+        
+          reader.onload = function(e) {
+            img.src = e.target.result;
+          };
+        
+          img.onload = function() {
+            const logoSize = size * 0.25;
+            const x = (size - logoSize) / 2;
+            const y = (size - logoSize) / 2;
+          
+            ctx.drawImage(img, x, y, logoSize, logoSize);
+          };
+        
+          reader.readAsDataURL(file);
+        }
+      }
       function toggleLogoInput() {
       const check = document.getElementById("logoCheck").checked;
       document.getElementById("logoInput").style.display =   check ? "block" : "none";
-    }
+      }
 
       function descargar() {
         const canvas = document.getElementById("canvas");
@@ -533,25 +541,5 @@ function generarQR() {
       panel.classList.toggle("active");
       }
     </script>
-
-<div class="about-btn" onclick="toggleAbout()">ℹ</div>
-
-<div class="about-panel" id="aboutPanel">
-  <div class="about-content">
-    <h3>Acerca de</h3>
-    <p>Desarrollado por DIEGOKUGAMER541</p>
-
-    <div class="links">
-
-    <a href="https://bedpks.com" target="_blank">BEDPKS</a>
-    <a href="https://diegokugamer541.github.io/GENERADOR-DE-MANIFEST" target="_blank">Generador de Manifest</a>
-    <a href="https://youtube.com/@diegokugamer541" target="_blank">YouTube</a>
-    <a href="https://twitch.tv/diegokugamer541" target="_blank">Twitch</a>
-    <a href="https://twitch.tv/ipodcraftyt" target="_blank">Twitch IpodcraftYT</a>
-    <a href="https://discord.gg/AMCtjwVNvk"   target="_blank">Discord Minecraft</a>
-    <a href="https://github.com/DIEGOKUGAMER541" target="_blank">GitHub</a>
-    <a href="https://ipodcraft.com" target="_blank"> Ipodcraft web</a>
-    </div>
-
   </body>
 </html>
